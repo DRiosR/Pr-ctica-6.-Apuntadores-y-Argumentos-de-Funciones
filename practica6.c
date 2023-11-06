@@ -84,7 +84,7 @@ int main()
         case 5:
             printf("[========ACTIVIDAD5========]\n\n");
             elemento_maximo(numeros, largo);
-            printf("\n\n[==========================]\n");
+            printf("\n[==========================]\n");
             break;
         }
     } while (menu == 1);
