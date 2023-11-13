@@ -1,22 +1,10 @@
 /*
-1. Suma de elementos en un arreglo: Crea una función que calcule la suma de los
-elementos en un arreglo utilizando apuntadores y aritmética de direcciones. La función
-debe tomar un apuntador al arreglo y devolver la suma.
-2. Copia de arreglos: Crea una función que copie un arreglo de origen en un arreglo de
-destino. Utiliza apuntadores para realizar esta operación. La función debe tomar dos
-apuntadores como argumentos, uno para el arreglo de origen y otro para el arreglo de
-destino.
-3. Concatenación de arreglos: Crea una función que tome dos arreglos de entrada y
-los concatene en un tercer arreglo. Utiliza apuntadores y aritmética de direcciones para
-realizar la concatenación. La función debe tomar tres apuntadores como argumentos:
-dos para los arreglos de entrada y uno para el arreglo de destino.
-4. Comparación de arreglos: Crea una función que compare dos arreglos y determine
-si son iguales. Utiliza apuntadores y aritmética de direcciones para realizar la
-comparación. La función debe tomar dos apuntadores como argumentos y devolver
-un valor que indique si los arreglos son iguales.
-5. Encontrar el elemento máximo: Crea una función que encuentre y devuelva el
-elemento máximo en el arreglo.
+Nombre del archivo: practica6.c
+Autor: Daniel Rios Rodriguez
+Fecha de creación: 12 de Noviembre de 2023
+Descripción: este programa hace operaciones con apuntadores en funciones.
 */
+
 #include <stdio.h>
 #include "RRD.h"
 int suma_de_areglo(int *arreglo, int largo);
@@ -90,91 +78,123 @@ int main()
     } while (menu == 1);
 }
 
-int suma_de_areglo(int *arreglo, int largo)
-{
+/*
+Función: suma_de_arreglo
+Descripción: Esta función calcula la suma de los elementos en un arreglo.
+Parámetros:
+- arreglo: Apuntador al arreglo de enteros.
+- largo: Número de elementos en el arreglo.
+Valor de retorno: La suma de los elementos en el arreglo.
+*/
+int suma_de_arreglo(int *arreglo, int largo) {
     int acu = 0;
     int *ptr = arreglo;
 
-    for (int i = 0; i < largo; i++)
-    {
+    for (int i = 0; i < largo; i++) {
         acu += *ptr;
         ptr++;
     }
 
     return acu;
 }
-void copiar_arreglo(int *arreglo_destino, int *arreglo_origen, int largo)
-{
-    int acu = 0;
-    int *ptr = arreglo_destino;
-    int *ptr2 = arreglo_origen;
-    for (int i = 0; i < largo; i++)
-    {
-        *ptr = *ptr2;
-        ptr++;
-        ptr2++;
+
+/*
+Función: copiar_arreglo
+Descripción: Esta función copia un arreglo de origen en un arreglo de destino.
+Parámetros:
+- arreglo_destino: Apuntador al arreglo de destino.
+- arreglo_origen: Apuntador al arreglo de origen.
+- largo: Número de elementos en el arreglo.
+*/
+void copiar_arreglo(int *arreglo_destino, int *arreglo_origen, int largo) {
+    int *ptr_destino = arreglo_destino;
+    int *ptr_origen = arreglo_origen;
+
+    for (int i = 0; i < largo; i++) {
+        *ptr_destino = *ptr_origen;
+        ptr_destino++;
+        ptr_origen++;
     }
 }
-void concatenar_arreglo(int *arreglo_destino, int *arreglo1, int largo1, int *arreglo2, int largo2)
-{
-    int *ptr = arreglo_destino;
-    int *ptr2 = arreglo1;
-    int *ptr3 = arreglo2;
-    int i;
-    for (i = 0; i < largo1; i++)
-    {
-        *ptr = *ptr2;
-        ptr++;
-        ptr2++;
+
+/*
+Función: concatenar_arreglo
+Descripción: Esta función concatena dos arreglos en un tercer arreglo.
+Parámetros:
+- arreglo_destino: Apuntador al arreglo de destino.
+- arreglo1: Apuntador al primer arreglo de entrada.
+- largo1: Número de elementos en el primer arreglo.
+- arreglo2: Apuntador al segundo arreglo de entrada.
+- largo2: Número de elementos en el segundo arreglo.
+*/
+void concatenar_arreglo(int *arreglo_destino, int *arreglo1, int largo1, int *arreglo2, int largo2) {
+    int *ptr_destino = arreglo_destino;
+    int *ptr1 = arreglo1;
+    int *ptr2 = arreglo2;
+
+    for (int i = 0; i < largo1; i++) {
+        *ptr_destino = *ptr1;
+        ptr_destino++;
+        ptr1++;
     }
 
-    for (i = 0; i < largo2; i++)
-    {
-        *ptr = *ptr3;
-        ptr++;
-        ptr3++;
+    for (int i = 0; i < largo2; i++) {
+        *ptr_destino = *ptr2;
+        ptr_destino++;
+        ptr2++;
     }
 }
-void comparar_arreglo(int *arreglo1, int largo, int *areglo2, int largo2)
-{
-    int *ptr = arreglo1;
-    int *ptr2 = areglo2;
-    int i, igual = 0;
-    if (largo != largo2)
-    {
-        printf("NO SON IGUALES");
+
+/*
+Función: comparar_arreglo
+Descripción: Esta función compara dos arreglos y determina si son iguales.
+Parámetros:
+- arreglo1: Apuntador al primer arreglo.
+- largo1: Número de elementos en el primer arreglo.
+- arreglo2: Apuntador al segundo arreglo.
+- largo2: Número de elementos en el segundo arreglo.
+*/
+void comparar_arreglo(int *arreglo1, int largo1, int *arreglo2, int largo2) {
+    int *ptr1 = arreglo1;
+    int *ptr2 = arreglo2;
+    int igual = 1; // Suponemos que son iguales hasta que encontremos una diferencia
+
+    if (largo1 != largo2) {
+        printf("NO SON IGUALES\n");
         return;
     }
-    for (i = 0; i < largo; i++)
-    {
-        if (*ptr != *ptr2)
-        {
-            printf("NO SON IGUALES");
-            return;
-        }
-        else
-        {
+
+    for (int i = 0; i < largo1; i++) {
+        if (*ptr1 != *ptr2) {
             igual = 0;
+            break;
         }
-        ptr++;
+        ptr1++;
         ptr2++;
     }
-    printf("SON IGUALES");
-    return;
-}
-void elemento_maximo(int *arreglo, int largo)
-{
-    int i;
-    int *ptr = arreglo;
-    int maximo = 0;
 
-    for (i = 0; i < largo; i++)
-    {
-        if (*ptr > maximo)
-        {
-            maximo = *ptr;
+    if (igual) {
+        printf("SON IGUALES\n");
+    } else {
+        printf("NO SON IGUALES\n");
+    }
+}
+
+/*
+Función: elemento_maximo
+Descripción: Esta función encuentra y devuelve el elemento máximo en el arreglo.
+Parámetros:
+- arreglo: Apuntador al arreglo de enteros.
+- largo: Número de elementos en el arreglo.
+*/
+void elemento_maximo(int *arreglo, int largo) {
+    int *ptr = arreglo;
+    int maximo = *ptr; // Inicializamos con el primer elemento del arreglo
+
+    for (int i = 1; i < largo; i++) {
+        if (*(ptr + i) > maximo) {
+            maximo = *(ptr + i);
         }
-        ptr++;
     }
 
     printf("El elemento máximo en el arreglo es: %d\n", maximo);
